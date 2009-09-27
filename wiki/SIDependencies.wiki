@@ -1,4 +1,4 @@
 Links to libraries needed to run SI code
 
-* [http://www.wxpython.org/download.php wxPython]
-* [http://www.pygame.org/download.shtml PyGame] (for audio playback support)
+  * [http://www.wxpython.org/download.php wxPython]
+  * [http://www.pygame.org/download.shtml PyGame] (for audio playback support)
