@@ -15,4 +15,6 @@ Links to libraries needed to run SI code
   * [http://pyopengl.sourceforge.net/ PyOpenGL]: Animation rendering
 
 Development environment:
- * [http://www.aptana.org/studio/download Aptana Studio for Python]
+ * [http://www.aptana.org/studio/download Aptana Studio for Python]: 
+   * Use default studio installer and then select the PyDev add-on after first launch. 
+   * SVN support is already provided.
