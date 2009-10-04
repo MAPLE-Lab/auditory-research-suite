@@ -3,7 +3,7 @@
  # Install wxWindows for Python 2.6
  # Install pygame for Python 2.6
  # Build and install PyOpenGL from lib in SVN (expand source and run "python2.6 setup.py install" in distribution).
- # Test running SensoryIntegrationMain.py.
+ # Test running !SensoryIntegrationMain.py.
  # To package standalone executable:
   # Install modulegraph-0.7.2.tgz from lib in SVN
   # Install py2app-0.4.2.tgz from lib in SVN
@@ -16,5 +16,5 @@ Links to libraries needed to run SI code
 
 Development environment:
  * [http://www.aptana.org/studio/download Aptana Studio for Python]: 
-   * Use default studio installer and then select the PyDev add-on after first launch. 
+   * Use default studio installer and then select the !PyDev add-on after first launch. 
    * SVN support is already provided.
