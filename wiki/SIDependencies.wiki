@@ -13,3 +13,6 @@ Links to libraries needed to run SI code
   * [http://www.wxpython.org/download.php wxPython]: GUI toolkit
   * [http://www.pygame.org/download.shtml PyGame]: Audio playback support (to be replaced)
   * [http://pyopengl.sourceforge.net/ PyOpenGL]: Animation rendering
+
+Development environment:
+ * [http://www.aptana.org/studio/download Aptana Studio for Python]
