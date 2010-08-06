@@ -1,0 +1,3 @@
+#summary Notes for handling source code.
+
+*When checking in code, make sure to check the username being used if you get an error.  When using Git, git svn dcommit --username [username] can handle cases where the default is incorrect.
