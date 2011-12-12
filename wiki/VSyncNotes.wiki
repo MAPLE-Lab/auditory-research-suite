@@ -1,1 +1,9 @@
-#Notes on coding approaches to synchronizing audio with video refresh
+_Notes on coding approaches to synchronizing audio with video refresh_
+
+
+Seems that vsync has some baggage...
+
+ * [http://stackoverflow.com/questions/589064/how-to-enable-vertical-sync-in-opengl How to enable vertical sync in opengl]
+ * [http://www.d-silence.com/feature.php?id=255 Unraveling the mystery of VSYNC]
+ * [http://www.opengl.org/wiki/Swap_Interval Swap Interval]
+
