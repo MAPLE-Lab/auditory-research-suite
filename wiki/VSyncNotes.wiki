@@ -8,9 +8,12 @@ Seems that vsync has some baggage...
  * [http://www.opengl.org/wiki/Swap_Interval Swap Interval]
  * [http://www.d-silence.com/feature.php?id=206 What does "Optimal" Refresh Rate Mean?]
  * [http://www.cs.columbia.edu/~hgs/rtsp/ Real Time Streaming Protocol (RTSP)]
- * [http://www.koonsolo.com/news/dewitters-gameloop/ (On the "game loop")
+ * [http://www.koonsolo.com/news/dewitters-gameloop/ (On the "game loop")]
+
 
 
 
 Other:
-* [http://www.softsynth.com/jsyn/ JSyn Audio Synthesis API]
+ * [http://www.softsynth.com/jsyn/ JSyn Audio Synthesis API]
+ * [http://puredata.info/ PureData RealTime A/V Programming Platform]
+ * [http://jmax.sourceforge.net/ jMax]
