@@ -1,6 +1,6 @@
 _Notes on coding approaches to synchronizing audio with video refresh_
 
-
+===On Synchronization===
 Seems that vsync has some baggage...
 
  * [http://stackoverflow.com/questions/589064/how-to-enable-vertical-sync-in-opengl How to enable vertical sync in opengl]
@@ -11,9 +11,27 @@ Seems that vsync has some baggage...
  * [http://www.koonsolo.com/news/dewitters-gameloop/ (On the "game loop")]
  * [http://ask.metafilter.com/113634/Learning-realtime-sound-event-synchronization-C-programming Real Time Sound Event Synchronization in C++]
 
+So far it seems like the best approach might be to start the sound and poll the playback system for elapsed time, adjusting animation loop to ensure coinciding events.
+
+From OpenAL 1.1 Specification, page 39:
+
+===Offset===
+Table 4-20. 
+Source AL_SEC_OFFSET Attribute
+||*Name*||*Signature*||*Values*||*Default*||
+||AL_SEC_OFFSET||f, fv, i, iv||[0.0f, any]||N/A||
 
 
-Other:
+Description: the playback position, expressed in seconds (the value will loop back to zero for looping sources).
+
+When setting AL_SEC_OFFSET on a source which is already playing, the playback will jump to the new offset unless the new offset is out of range, in which case an AL_INVALID_VALUE error is set. If the source is not playing, then the offset will be applied on the next alSourcePlay call.
+
+The position is relative to the beginning of all the queued buffers for the source, and any queued buffers traversed by a set call will be marked as processed.
+
+This value is based on byte position, so a pitch-shifted source will have an exaggerated playback speed. For example, you can be 0.500 seconds into a buffer having taken only 0.250 seconds to get there if the pitch is set to 2.0.
+
+
+===Other===
  * [http://www.softsynth.com/jsyn/ JSyn Audio Synthesis API]
  * [http://puredata.info/ PureData RealTime A/V Programming Platform]
  * [http://jmax.sourceforge.net/ jMax]
