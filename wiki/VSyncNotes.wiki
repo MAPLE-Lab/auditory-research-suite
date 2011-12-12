@@ -17,3 +17,4 @@ Other:
  * [http://www.softsynth.com/jsyn/ JSyn Audio Synthesis API]
  * [http://puredata.info/ PureData RealTime A/V Programming Platform]
  * [http://jmax.sourceforge.net/ jMax]
+ * [http://www.fmod.org/index.php/fmod FMOD]
