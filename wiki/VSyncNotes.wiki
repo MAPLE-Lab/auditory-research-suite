@@ -9,7 +9,7 @@ Seems that vsync has some baggage...
  * [http://www.d-silence.com/feature.php?id=206 What does "Optimal" Refresh Rate Mean?]
  * [http://www.cs.columbia.edu/~hgs/rtsp/ Real Time Streaming Protocol (RTSP)]
  * [http://www.koonsolo.com/news/dewitters-gameloop/ (On the "game loop")]
-
+ * [http://ask.metafilter.com/113634/Learning-realtime-sound-event-synchronization-C-programming Real Time Sound Event Synchronization in C++]
 
 
 
