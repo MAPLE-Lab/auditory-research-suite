@@ -1,0 +1,12 @@
+#summary Available Properties for <experiment>.properties files.
+
+= General Properties =
+
+
+= Rhythm Specific Properties =
+
+
+= Sensory Integration (SI) Specific Properties =
+
+
+= TOJ Specific Properties =
