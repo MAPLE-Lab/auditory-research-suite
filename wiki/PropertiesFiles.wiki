@@ -1,12 +1,153 @@
 #summary Available Properties for <experiment>.properties files.
+<wiki:toc max_depth="2"/>
+------
+Properties files match a key to a value to allow per experiment configuration of parameters.
 
+They follow the form: 
+{{{key=value}}}
+
+Different experiments try to read the values for different keys. Extraneous key value pairs are ignored.
+------
 = General Properties =
 
+experimentID
+subExperimentID
 
+debug
+
+blockSetRepetitions
+metablocks
+randomizeBlocks
+randomizeTrials
+
+statusOrientation
+
+playbackGain
+
+preStimulusSilence
+postStimulusSilence
+
+allowFeedback
+accuracyCorrectText
+accuracyIncorrectText
+resultsFormatText
+
+trialDelay
+numWarmupTrials
+warmupDelayText
+firstDelayText
+trialDelayText
+
+introScreenTitle
+introScreenText
+
+preWarmupTitle
+preWarmupText
+
+warmupScreenTrialTitle
+warmupScreenTrialText
+
+preTrialTitle
+preTrialText
+
+testScreenTrialTitle
+testScreenTrialText
+
+completionTitle
+completionText
+------
 = Rhythm Specific Properties =
 
+speedMode
+randomizeAcrossRepetitions
+middleC
 
-= Sensory Integration (SI) Specific Properties =
+trialSpecificationStyle
+
+highPitch
+lowPitch
+playbackMeasures
+beatsPerMeasure
+silenceMultiplier
+
+trialNotePattern
+primaryPitch
+primaryVelocity
+primaryDuration
+secondaryPitch
+secondaryVelocity
+secondaryDuration
+tertiaryPitch
+tertiaryVelocity
+tertiaryDuration
+probePitch
+probeVelocity
+probeDuration
+silenceDuration
+
+usePercussionChannel
+instrumentNumber
+
+baseIOIs
+offsetDegrees
+probeDetuneAmounts
+experimentTestingType
+
+question.label
+answerPositive.label
+answerNegative.label
+answerPositive.hotkey
+answerNegative.hotkey
 
 
-= TOJ Specific Properties =
+confidenceMin
+confidenceOrderHighToLow
+confidence.<integer>
+confidence.<integer>.hotkey
+
+withTapText
+withoutTapText
+enterResponseText
+
+computerKeyInput
+recordNoteOff
+recordActualTapNote
+recordActualTapVelocity
+suppressionWindow
+
+subjectTapSound
+subjectTapVelocity
+subjectTapNote
+subjectTapGain
+subjectNoTapGain
+subjectTapInstrumentNumber
+
+------
+= SI and TOJ Properties =
+fullScreen
+
+includeAudioBlock
+singleAudioBlock
+singleAudioFullRandom
+includeAnimationBlock
+singleAnimationBlock
+singleAnimationFullRandom
+includeVideoBlock
+singleVideoBlock
+singleVideoFullRandom
+includeAudioAnimationBlock
+singleAudioAnimationBlock
+singleAudioAnimationFullRandom
+
+screenWidth
+screenHeight
+
+
+
+== SI Specific Properties ==
+
+showTickMarks
+sliderLength
+
+
+== TOJ Specific Properties ==
