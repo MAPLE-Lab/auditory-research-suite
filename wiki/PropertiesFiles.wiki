@@ -4,57 +4,70 @@
 Properties files match a key to a value to allow per experiment configuration of parameters.
 
 They follow the form: 
-{{{key=value}}}
+{{{key= value}}}
+
+To break up long values, escape to the next line by putting a backslash (\) at the end of a line.
+Example:
+<pre>
+    key= this is a very long\
+    string value that had to be split
+</pre>
 
 Different experiments try to read the values for different keys. Extraneous key value pairs are ignored.
 ------
 = General Properties =
+== Experiment logging ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *experimentID* || integer || Use for storing/labeling data about a specific experiment number ||
+|| *subExperimentID* || integer || Use for storing/labeling data about a specific experiment number ||
+|| *debug* || boolean || Turn on to show debug console window ||
 
-experimentID
-subExperimentID
+== Trial Blocks Setup ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *blockSetRepetitions* || positive integer || Number of times blocks should be presented. Blocks sets are sets of [no. of offsetDegrees] trials. A set of blocks covers every baseIOI with and without tapping, so the number of blocks in a full set is [no. baseIOIs]`*`2. Each set of blocks will be randomized independently, unless specified. ||
+|| *metablocks* || non-negative integer|| Metablocks are groups of blocks, possibly repeated ||
+|| *randomizeBlocks* || boolean || Randomizes the order of blocks within different metablocks ||
+|| *randomizeTrials* || boolean || Randomizes the order of trials within different blocks ||
 
-debug
+== Trial Timings ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *trialDelay* || non-negative integer || Number of milliseconds to wait until proceeding to the next trial ||
+|| *preStimulusSilence* || non-negative integer || Number of milliseconds to wait before playback of stimulus. ||
+|| *postStimulusSilence* || non-negative integer || Number of milliseconds to wait after playback of stimulus. ||
 
-blockSetRepetitions
-metablocks
-randomizeBlocks
-randomizeTrials
+== Volume Settings ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *playbackGain* || float in range [0.0, 1.0] || Playback volume as a percentage of maximum ||
 
-statusOrientation
+== Warmup Settings ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *numWarmupTrials* || non-negative integer || Number of warmup trials to run before actual experiment trials ||
+|| *warmupDelayText* || string (html allowed)|| Text to display during the [PropertiesFiles#Trial_Timings trial delay time] before a warmup trial ||
 
-playbackGain
+== Feedback Settings ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *allowFeedback* || boolean || If feedback is false, then the following text properties are ignored. WARNING: Sensory Integration does not currently determine correctness of a response, so this should be false for SI experiments! ||
+|| *accuracyCorrectText* || string (html allowed) || Text to display when a response is correct ||
+|| *accuracyIncorrectText* || string (html allowed) || Text to display when a response is incorrect ||
+|| *resultsFormatText* || string (html allowed) ||  Format string for displaying result percentages. Example: `<html><small>%d of %d correct (%d%%)`||
 
-preStimulusSilence
-postStimulusSilence
-
-allowFeedback
-accuracyCorrectText
-accuracyIncorrectText
-resultsFormatText
-
-trialDelay
-numWarmupTrials
-warmupDelayText
-firstDelayText
-trialDelayText
-
-introScreenTitle
-introScreenText
-
-preWarmupTitle
-preWarmupText
-
-warmupScreenTrialTitle
-warmupScreenTrialText
-
-preTrialTitle
-preTrialText
-
-testScreenTrialTitle
-testScreenTrialText
-
-completionTitle
-completionText
+== Visual Settings ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *statusOrientation* || _verticalTop, verticalBottom, horizontalLeft, horizontalRight, suppressed_ || Use one of these 5 values to place the location of the status box. Defaults to _horizontalLeft_ if unspecified. _suppressed_ blocks the status box from being shown. ||
+|| *firstDelayText* || string (html allowed) || Text to display during the trial delay time before the first recorded trial. ||
+|| *trialDelayText* || string (html allowed) || Text to display during the trial delay time for all other trials. ||
+|| *introScreenTitle* || string (html allowed) || Title for introduction screen. ||
+|| *introScreenText* || string (html allowed) || Welcome and general instructions. ||
+|| *preWarmupTitle* || string (html allowed) || Title for pre-warmup screen. ||
+|| *preWarmupText* || string (html allowed) || Warmup trials general instructions. ||
+|| *warmupScreenTrialTitle* || string (html allowed) || Title for warmup trial screen. ||
+|| *warmupScreenTrialText* || string (html allowed) || Warmup trial instructions. ||
+|| *preTrialTitle* || string (html allowed) || Title for pre-trial screen. ||
+|| *preTrialText* || string (html allowed) || Trial general instructions. ||
+|| *testScreenTrialTitle* || string (html allowed) || Title for trial screen. ||
+|| *testScreenTrialText* || string (html allowed) || Trial instructions. ||
+|| *completionTitle* || string (html allowed) || Title for completion screen. ||
+|| *completionText* || string (html allowed) || Completion and thanks for participation. ||
 ------
 = Rhythm Specific Properties =
 
@@ -102,8 +115,8 @@ answerNegative.hotkey
 
 confidenceMin
 confidenceOrderHighToLow
-confidence.<integer>
-confidence.<integer>.hotkey
+confidence.{integer}
+confidence.{integer}.hotkey
 
 withTapText
 withoutTapText
@@ -142,12 +155,57 @@ singleAudioAnimationFullRandom
 screenWidth
 screenHeight
 
+*-Animation options-*
+animationPointAspect
+animationPointSize
+numAnimationPoints
+connectDots
 
+*-Audio options-*
+soundOffsets
+
+
+videoParams
+videoFileFormat
+videoFileExtensions
+videoFileSubDirectory
+animationParams
+animationFileFormat
+animationFileExtensions
+animationFileSubDirectory
+audioParams
+audioFileFormat
+audioFileExtensions
+audioFileSubDirectory
+
+synchronizeParameters
+
+
+*Parameter setting*
+{parameter}
+{parameter}.label
+{parameter}.labels
 
 == SI Specific Properties ==
 
 showTickMarks
 sliderLength
 
+durationLow
+durationHigh
+agreementLow
+agreementHigh
+
+durationMin
+durationMax
+agreementMin
+agreementMax
+
 
 == TOJ Specific Properties ==
+
+animationFrameAdvance
+renderCallAhead
+
+audioPollWait
+audioCallAhead
