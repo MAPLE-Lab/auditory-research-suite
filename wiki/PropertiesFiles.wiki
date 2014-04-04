@@ -68,42 +68,56 @@ Different experiments try to read the values for different keys. Extraneous key 
 || *testScreenTrialText* || string (html allowed) || Trial instructions. ||
 || *completionTitle* || string (html allowed) || Title for completion screen. ||
 || *completionText* || string (html allowed) || Completion and thanks for participation. ||
+
+
 ------
 = Rhythm Specific Properties =
 
-speedMode
-randomizeAcrossRepetitions
-middleC
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *speedMode* || boolean || Debug setting. Flag to divide IOIs by 10 for testing experiment quickly. ||
+|| *randomizeAcrossRepetitions* || boolean || true indicates that all trials within a block will be randomized, even across repetitions. Specialization for rhythm, see [PropertiesFiles#Trial_Blocks_Setup general block setup] ||
+|| *middleC* || Pitch value || Set the Middle-C value to make instrument specification easier with different SoundBanks, as each use a different representation. Value is normally labeled either "C3", "C4", or "C5". This defaults to C4. Octave values from 5 below to 5 above are allowed around this Middle C, as per MIDI specification. For example, if set to C4, this allows notes in octaves from -1 to 9. ||
+|| *usePercussionChannel* || boolean || If this is set to true, rhythm will be generated using the Percussion channel instruments.  The soundbank being used will need to have percussion instruments, which will be mapped by Notes/(Pitches) instead of instrument numbers. ||
+|| *instrumentNumber* || int [0,127] || General midi bank number to select for playback instrument. [0..127]. If usePercussionChannel is false, this sets the instrument to use. Otherwise (when usePercussionChannel is true) this sets the drum-kit to use, which is normally a value in the set [0,8,16,24,32,40,48,56], but can vary based on the Soundbank being used. ||
 
-trialSpecificationStyle
+== Trial Specification ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *trialSpecificationStyle* || _HighLowPitches, PatternWithNotes_ || Specify which style of pattern input to use for building trial note sequences. Defaults to PatternWithNotes ||
+|| *baseIOIs* || comma delimited list of integers || List of integers specifying the inter-onset time between notes in milliseconds. This is basically a psychologists way of discussing tempo. An IOI of 1000 means that notes are spaced 1 second apart, and would correspond to a musical tempo marking of 60 beats per minute. ||
+|| *offsetDegrees* || comma delimited list of floats || List representing fraction of baseIOI that probe tone should be offset [0-1] So for example, a 0.1 for BaseIOI=600 means trials at 600+/-60 (540 and 660). ||
+|| *probeDetuneAmounts* || comma delimited list of integers || List of probe detune offsets, which pitchbend the probe by cents (hundredths of semitones). Can take any values, allowing arbitrary detuning to the extremes allowed by MIDI. Leaving empty or setting to just '0' will effectively cause the experiment to run as before the inclusion of probe detunes.  ||
 
-highPitch
-lowPitch
-playbackMeasures
-beatsPerMeasure
-silenceMultiplier
+==== For HighLowPitches specification ====
+|| *highPitch* || Pitch value || Note value played on the stressed beat. ||
+|| *lowPitch* || Pitch value || Note value played on non-stressed beats. ||
+|| *playbackMeasures* || non-negative integer || Number of measures played ||
+|| *beatsPerMeasure* || non-negative integer || Number of beats per measures (first beat is the stressed one) ||
+|| *silenceMultiplier* || non-negative integer || Number of IOI units of silence after sounded measures (not including offset) ||
 
-trialNotePattern
-primaryPitch
-primaryVelocity
-primaryDuration
-secondaryPitch
-secondaryVelocity
-secondaryDuration
-tertiaryPitch
-tertiaryVelocity
-tertiaryDuration
-probePitch
-probeVelocity
-probeDuration
-silenceDuration
+==== For PatternWithNotes specification ====
+*Pitch* is given as a Note value
 
-usePercussionChannel
-instrumentNumber
+*Velocity* is an integer in [0,127] (defaults to 64)
 
-baseIOIs
-offsetDegrees
-probeDetuneAmounts
+*Duration* is a percentage of the baseIOI that the note should play. Float value (defaults to 1.0). This allows for arbitrary timings by changing the [PropertiesFiles#Trial_Specification baseIOI].
+
+|| *trialNotePattern* || String Pattern consisting of [pst`_*`] || Specified with the characters 'p' (primary), 's' (secondary), 't' (tertiary), '`_`' (silence), '`*`' (probe). Capitalization and spaces are ignored for readability. Example: `Psts Psts Psts P_ _ _ *` ||
+|| *primaryPitch* || Pitch value || ||
+|| *primaryVelocity* || int [0,127] || ||
+|| *primaryDuration* || float || ||
+|| *secondaryPitch* || Pitch value || ||
+|| *secondaryVelocity* || int [0,127] || ||
+|| *secondaryDuration* || float || ||
+|| *tertiaryPitch* || Pitch value || ||
+|| *tertiaryVelocity* || int [0,127] || ||
+|| *tertiaryDuration* || float || ||
+|| *probePitch* || Pitch value || ||
+|| *probeVelocity* || int [0,127] || ||
+|| *probeDuration* || float || ||
+|| *silenceDuration* || float || ||
+
+
+
 experimentTestingType
 
 question.label
