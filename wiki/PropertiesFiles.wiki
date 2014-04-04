@@ -129,6 +129,7 @@ WARNING: offsetDegrees and probeDetuneAmounts should not both have multiple valu
 
 Hotkeys must all be unique, or erroneous behavior will occur. Only first character from string will be used for hotkey.
 
+
 == Confidence Labeling == 
 
 Property keys for confidence must be of the form: "confidence.{integer}" where the integer is >= confidenceMin Values may not be skipped, although order does not matter.
@@ -155,22 +156,25 @@ confidence.2.hotkey=	5
 || *confidence.{integer}* || string || label for confidence level {integer} ||
 || *confidence.{integer}.hotkey* || string || hotkey for confidence level {integer} ||
 
+== In Trial User Update Labels ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *withTapText* || string (html allowed) || Displays for trials that the user should tap along with. ||
+|| *withoutTapText* || string (html allowed) || Displays for trials that the user should _not_ tap along with. ||
+|| *enterResponseText* || string (html allowed) || Displays after a trial to request user response. ||
+
 == User Tap Responses ==
 || _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
-|| *withTapText* || 
-|| *withoutTapText* ||
-|| *enterResponseText* ||
-|| *computerKeyInput* ||
-|| *recordNoteOff* ||
-|| *recordActualTapNote* ||
-|| *recordActualTapVelocity* ||
-|| *suppressionWindow* ||
-|| *subjectTapSound* ||
-|| *subjectTapVelocity* ||
-|| *subjectTapNote* ||
-|| *subjectTapGain* ||
-|| *subjectNoTapGain* ||
-|| *subjectTapInstrumentNumber* ||
+|| *computerKeyInput* || boolean || Allow user taps via computer keyboard ||
+|| *recordNoteOff* || boolean || Record MIDI note-off events ||
+|| *recordActualTapNote* || boolean || Whether to record the actual tap note (if valid and available, computer keyboard note is generated) or the tap note override. Defaults to true. ||
+|| *recordActualTapVelocity* || boolean || Whether to log/record the actual tap velocity (if valid and available) or the tap velocity override. Defaults to true. ||
+|| *suppressionWindow* || integer || Number of milliseconds within which to ignore repeat note-on events ||
+|| *subjectTapSound* || boolean || Play a feedback sound for subject taps ||
+|| *subjectTapVelocity* || int [0,127] || Value to override the subject's tap velocity, or -1 to use the actual (or default, for computer key presses) tap velocity ||
+|| *subjectTapNote* || Pitch value || Note for subject tap sounds ||
+|| *subjectTapGain* || float [0.0, 1.0] || Gain level for subject tap sounds DURING TAP TRIALS as a percentage of maximum [0.0, 1.0] ||
+|| *subjectNoTapGain* || float [0.0, 1.0] || Gain level for subject tap sounds DURING NON-TAP TRIALS as a percentage of maximum [0.0, 1.0]. Absence of this property or a negative value will default to the value of subjectTapGain. ||
+|| *subjectTapInstrumentNumber* || int [0,127] || General midi bank number for subject tap sound ||
 
 ------
 = SI and TOJ Properties =
