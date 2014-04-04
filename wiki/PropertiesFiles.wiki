@@ -229,24 +229,67 @@ synchronizeParameters
 
 == SI Specific Properties ==
 
-showTickMarks
-sliderLength
+=== Slider Response Controls ===
 
-durationLow
-durationHigh
-agreementLow
-agreementHigh
+Long answer labels may mess up the experiment GUI layout.
 
-durationMin
-durationMax
-agreementMin
-agreementMax
-
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *showTickMarks* || boolean || Set to show the tick marks on response sliders. ||
+|| *sliderLength* || integer || Set the pixel length of response sliders. Minimum of 50 px, maximum of 2000 px (for large screens). Default value is 550 pixels. Exceeding the limits will default to this value. For large values, the experiment window might need to be resized. || 
+|| *durationLow* || string || Low end label for duration slider ||
+|| *durationHigh* || string || High end label for duration slider ||
+|| *agreementLow* || string || Low end label for agreement slider ||
+|| *agreementHigh* || string || High end label for agreement slider ||
+|| *durationMin* || integer || minimum end of allowed range for duration slider ||
+|| *durationMax* || integer || maximum end of allowed range for duration slider  ||
+|| *agreementMin* || integer || minimum end of allowed range for agreement slider ||
+|| *agreementMax* || integer || maximum end of allowed range for agreement slider  ||
 
 == TOJ Specific Properties ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *audioPollWait* || integer || Time in milliseconds to wait between audio playback completion polling. Note: polling only applies after the expected audio duration has already elapsed but the audio is still playing. ||
+|| *audioCallAhead* || float [0.0,1.0] || Gain level for playback as a percentage of maximum [0.0, 1.0] ||
 
-animationFrameAdvance
-renderCallAhead
+Note: the following two values should likely be the same . . .  
+|| *animationFrameAdvance* || integer || How much time the renderer should look ahead into the future to determine the frame that it is currently rendering.  This value cannot be greater than the monitor refresh period (milliseconds). Negative values indicate looking into the past for frames. ||
+|| *renderCallAhead* || integer || How far ahead the frame render should be called.  This value cannot be greater than the monitor refresh period (milliseconds). Negative values indicate a delay. ||
 
-audioPollWait
-audioCallAhead
+
+=== Question Labeling ===
+
+*WARNING: Internal code makes assumption that the positive label is corresponded to the Dot response. Changing the experiment meaning of these values _will_ lead to erroneous output data.*
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *question.label* || string || Suggested value for TOJ: "Which came first?" || 
+|| *answerPositive.label* || string || Suggested value: "Dot" ||
+|| *answerNegative.label* || string || Suggested value: "Tone" ||
+|| *answerPositive.hotkey* || string || Suggested value: 'd' ||
+|| *answerNegative.hotkey* || string || Suggested value: 't' ||
+
+Hotkeys must all be unique, or erroneous behavior will occur. Only first character from string will be used for hotkey.
+
+
+=== Confidence Labeling ===
+
+Property keys for confidence must be of the form: "confidence.{integer}" where the integer is >= confidenceMin Values may not be skipped, although order does not matter.
+
+Example:
+<pre> 
+confidenceMin=-2
+confidenceOrderHighToLow=true
+confidence.-2=Very unconfident
+confidence.-1=Somewhat unconfident
+confidence.1=Somewhat confident
+confidence.0=Unsure
+confidence.2=Very confident
+confidence.-2.hotkey=	1
+confidence.-1.hotkey=	2
+confidence.0.hotkey=	3
+confidence.1.hotkey=	4
+confidence.2.hotkey=	5
+</pre>
+
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *confidenceMin* || integer || The minimum (numerically) confidence value ||
+|| *confidenceOrderHighToLow* || boolean || Indicates the numeric order (descending) in which the confidence levels will appear: true indicates high-to-low, false indicates low-to-high. ||
+|| *confidence.{integer}* || string || label for confidence level {integer} ||
+|| *confidence.{integer}.hotkey* || string || hotkey for confidence level {integer} ||
