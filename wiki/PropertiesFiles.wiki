@@ -87,6 +87,8 @@ Different experiments try to read the values for different keys. Extraneous key 
 || *offsetDegrees* || comma delimited list of floats || List representing fraction of baseIOI that probe tone should be offset [0-1] So for example, a 0.1 for BaseIOI=600 means trials at 600+/-60 (540 and 660). ||
 || *probeDetuneAmounts* || comma delimited list of integers || List of probe detune offsets, which pitchbend the probe by cents (hundredths of semitones). Can take any values, allowing arbitrary detuning to the extremes allowed by MIDI. Leaving empty or setting to just '0' will effectively cause the experiment to run as before the inclusion of probe detunes.  ||
 
+WARNING: offsetDegrees and probeDetuneAmounts should not both have multiple values. This would create experiments where both variables were varied, while we can only test one type of varying parameter. See more important notes at [PropertiesFiles#Question_Labeling Question Labeling].
+
 ==== For HighLowPitches specification ====
 || *highPitch* || Pitch value || Note value played on the stressed beat. ||
 || *lowPitch* || Pitch value || Note value played on non-stressed beats. ||
@@ -111,43 +113,64 @@ Different experiments try to read the values for different keys. Extraneous key 
 || *tertiaryPitch* || Pitch value || ||
 || *tertiaryVelocity* || int [0,127] || ||
 || *tertiaryDuration* || float || ||
-|| *probePitch* || Pitch value || ||
+|| *probePitch* || Pitch value || If unspecified, will default to the same as the primary pitch. ||
 || *probeVelocity* || int [0,127] || ||
 || *probeDuration* || float || ||
 || *silenceDuration* || float || ||
 
+== Question Labeling ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *experimentTestingType* || _OffsetTiming, ProbeDetune_ || Indicates what type of testing this experiment will run. If value is "_OffsetTiming_", will check subject responses against offset timing. (Make sure to only have zero or one probeDetuneAmounts value when testing timing.) If value is "_ProbeDetune_", will check subject responses against probe detune. (Make sure to only have zero or one offsetDegrees value when testing detune.) No current support for recording both types simultaneously. ||
+|| *question.label* || string || This labels the question part of user response. Change based on experiment, e.g. "Accurate timing?" or "Accurate tuning?" ||
+|| *answerPositive.label* || string || Suggested value: "Yes" ||
+|| *answerNegative.label* || string || Suggested value: "No" ||
+|| *answerPositive.hotkey* || string || Suggested value: 'y' ||
+|| *answerNegative.hotkey* || string || Suggested value: 'n' ||
 
+Hotkeys must all be unique, or erroneous behavior will occur. Only first character from string will be used for hotkey.
 
-experimentTestingType
+== Confidence Labeling == 
 
-question.label
-answerPositive.label
-answerNegative.label
-answerPositive.hotkey
-answerNegative.hotkey
+Property keys for confidence must be of the form: "confidence.{integer}" where the integer is >= confidenceMin Values may not be skipped, although order does not matter.
 
+Example:
+<pre> 
+confidenceMin=-2
+confidenceOrderHighToLow=true
+confidence.-2=Very unconfident
+confidence.-1=Somewhat unconfident
+confidence.1=Somewhat confident
+confidence.0=Unsure
+confidence.2=Very confident
+confidence.-2.hotkey=	1
+confidence.-1.hotkey=	2
+confidence.0.hotkey=	3
+confidence.1.hotkey=	4
+confidence.2.hotkey=	5
+</pre>
 
-confidenceMin
-confidenceOrderHighToLow
-confidence.{integer}
-confidence.{integer}.hotkey
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *confidenceMin* || integer || The minimum (numerically) confidence value ||
+|| *confidenceOrderHighToLow* || boolean || Indicates the numeric order (descending) in which the confidence levels will appear: true indicates high-to-low, false indicates low-to-high. ||
+|| *confidence.{integer}* || string || label for confidence level {integer} ||
+|| *confidence.{integer}.hotkey* || string || hotkey for confidence level {integer} ||
 
-withTapText
-withoutTapText
-enterResponseText
-
-computerKeyInput
-recordNoteOff
-recordActualTapNote
-recordActualTapVelocity
-suppressionWindow
-
-subjectTapSound
-subjectTapVelocity
-subjectTapNote
-subjectTapGain
-subjectNoTapGain
-subjectTapInstrumentNumber
+== User Tap Responses ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *withTapText* || 
+|| *withoutTapText* ||
+|| *enterResponseText* ||
+|| *computerKeyInput* ||
+|| *recordNoteOff* ||
+|| *recordActualTapNote* ||
+|| *recordActualTapVelocity* ||
+|| *suppressionWindow* ||
+|| *subjectTapSound* ||
+|| *subjectTapVelocity* ||
+|| *subjectTapNote* ||
+|| *subjectTapGain* ||
+|| *subjectNoTapGain* ||
+|| *subjectTapInstrumentNumber* ||
 
 ------
 = SI and TOJ Properties =
