@@ -1,5 +1,11 @@
 #summary Available Properties for <experiment>.properties files.
 <wiki:toc max_depth="2"/>
+
+Example properties files:
+ * [GeneralRhythmPropertiesFile Example rhythm.properties]
+ * [GeneralSIPropertiesFile Example si.properties]
+ * [GeneralTOJPropertiesFile Example toj.properties]
+
 ------
 Properties files match a key to a value to allow per experiment configuration of parameters.
 
