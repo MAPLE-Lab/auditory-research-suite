@@ -1,5 +1,9 @@
 #summary General rhythm.properties file
 
+This is a properties file to setup a rhythm experiment. 
+
+It is testing for probe detune, with detune amounts of 0 or 1200 cents, with baseIOIs of 400 and 600.
+
 {{{ 
 #
 # Rhythm Experiment applet configuration file
