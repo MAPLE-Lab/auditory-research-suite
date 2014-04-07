@@ -8,10 +8,10 @@ They follow the form:
 
 To break up long values, escape to the next line by putting a backslash (\) at the end of a line.
 Example:
-<pre>
+{{{
     key= this is a very long\
     string value that had to be split
-</pre>
+}}}
 
 Different experiments try to read the values for different keys. Extraneous key value pairs are ignored.
 ------
@@ -82,21 +82,21 @@ Different experiments try to read the values for different keys. Extraneous key 
 
 == Trial Specification ==
 || _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
-|| *trialSpecificationStyle* || _HighLowPitches, PatternWithNotes_ || Specify which style of pattern input to use for building trial note sequences. Defaults to PatternWithNotes ||
-|| *baseIOIs* || comma delimited list of integers || List of integers specifying the inter-onset time between notes in milliseconds. This is basically a psychologists way of discussing tempo. An IOI of 1000 means that notes are spaced 1 second apart, and would correspond to a musical tempo marking of 60 beats per minute. ||
-|| *offsetDegrees* || comma delimited list of floats || List representing fraction of baseIOI that probe tone should be offset [0-1] So for example, a 0.1 for BaseIOI=600 means trials at 600+/-60 (540 and 660). ||
-|| *probeDetuneAmounts* || comma delimited list of integers || List of probe detune offsets, which pitchbend the probe by cents (hundredths of semitones). Can take any values, allowing arbitrary detuning to the extremes allowed by MIDI. Leaving empty or setting to just '0' will effectively cause the experiment to run as before the inclusion of probe detunes.  ||
+|| *trialSpecificationStyle* || _!HighLowPitches, !PatternWithNotes_ || Specify which style of pattern input to use for building trial note sequences. Defaults to PatternWithNotes ||
+|| *baseIOIs* || comma delimited list of integers || List of integers specifying the inter-onset time between notes in milliseconds. This is basically a psychologists way of discussing tempo. An IOI of 1000 means that notes are spaced 1 second apart, and would correspond to a musical tempo marking of 60 beats per minute. KEY EXPERIMENT VARIABLE ||
+|| *offsetDegrees* || comma delimited list of floats || List representing fraction of baseIOI that probe tone should be offset [0-1] So for example, a 0.1 for BaseIOI=600 means trials at 600+/-60 (540 and 660). KEY EXPERIMENT VARIABLE ||
+|| *probeDetuneAmounts* || comma delimited list of integers || List of probe detune offsets, which pitchbend the probe by cents (hundredths of semitones). Can take any values, allowing arbitrary detuning to the extremes allowed by MIDI. Leaving empty or setting to just '0' will effectively cause the experiment to run as before the inclusion of probe detunes. KEY EXPERIMENT VARIABLE ||
 
 WARNING: offsetDegrees and probeDetuneAmounts should not both have multiple values. This would create experiments where both variables were varied, while we can only test one type of varying parameter. See more important notes at [PropertiesFiles#Question_Labeling Question Labeling].
 
-==== For HighLowPitches specification ====
+==== For !HighLowPitches specification ====
 || *highPitch* || Pitch value || Note value played on the stressed beat. ||
 || *lowPitch* || Pitch value || Note value played on non-stressed beats. ||
 || *playbackMeasures* || non-negative integer || Number of measures played ||
 || *beatsPerMeasure* || non-negative integer || Number of beats per measures (first beat is the stressed one) ||
 || *silenceMultiplier* || non-negative integer || Number of IOI units of silence after sounded measures (not including offset) ||
 
-==== For PatternWithNotes specification ====
+==== For !PatternWithNotes specification ====
 *Pitch* is given as a Note value
 
 *Velocity* is an integer in [0,127] (defaults to 64)
@@ -120,7 +120,7 @@ WARNING: offsetDegrees and probeDetuneAmounts should not both have multiple valu
 
 == Question Labeling ==
 || _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
-|| *experimentTestingType* || _OffsetTiming, ProbeDetune_ || Indicates what type of testing this experiment will run. If value is "_OffsetTiming_", will check subject responses against offset timing. (Make sure to only have zero or one probeDetuneAmounts value when testing timing.) If value is "_ProbeDetune_", will check subject responses against probe detune. (Make sure to only have zero or one offsetDegrees value when testing detune.) No current support for recording both types simultaneously. ||
+|| *experimentTestingType* || _!OffsetTiming, !ProbeDetune_ || Indicates what type of testing this experiment will run. If value is "_!OffsetTiming_", will check subject responses against offset timing. (Make sure to only have zero or one probeDetuneAmounts value when testing timing.) If value is "_!ProbeDetune_", will check subject responses against probe detune. (Make sure to only have zero or one offsetDegrees value when testing detune.) No current support for recording both types simultaneously. ||
 || *question.label* || string || This labels the question part of user response. Change based on experiment, e.g. "Accurate timing?" or "Accurate tuning?" ||
 || *answerPositive.label* || string || Suggested value: "Yes" ||
 || *answerNegative.label* || string || Suggested value: "No" ||
@@ -135,7 +135,7 @@ Hotkeys must all be unique, or erroneous behavior will occur. Only first charact
 Property keys for confidence must be of the form: "confidence.{integer}" where the integer is >= confidenceMin Values may not be skipped, although order does not matter.
 
 Example:
-<pre> 
+{{{
 confidenceMin=-2
 confidenceOrderHighToLow=true
 confidence.-2=Very unconfident
@@ -148,7 +148,7 @@ confidence.-1.hotkey=	2
 confidence.0.hotkey=	3
 confidence.1.hotkey=	4
 confidence.2.hotkey=	5
-</pre>
+}}}
 
 || _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
 || *confidenceMin* || integer || The minimum (numerically) confidence value ||
@@ -178,55 +178,134 @@ confidence.2.hotkey=	5
 
 ------
 = SI and TOJ Properties =
-fullScreen
+|| *fullScreen* || boolean || Run the experiment in fullscreen mode. Not applicable in demo mode. ||
 
-includeAudioBlock
-singleAudioBlock
-singleAudioFullRandom
-includeAnimationBlock
-singleAnimationBlock
-singleAnimationFullRandom
-includeVideoBlock
-singleVideoBlock
-singleVideoFullRandom
-includeAudioAnimationBlock
-singleAudioAnimationBlock
-singleAudioAnimationFullRandom
+Screen width and height - used to set the animation and/or video window size. Values that are too large will not have enough room to render
 
-screenWidth
-screenHeight
+|| *screenWidth* || non-negative integer || Suggested value: 640 ||
+|| *screenHeight* || non-negative integer || Suggested value: 480 ||
 
-*-Animation options-*
-animationPointAspect
-animationPointSize
-numAnimationPoints
-connectDots
+== Audio/Visual Block Inclusion ==
+Block types to include, as well as single-block structure and randomization parameters.
 
-*-Audio options-*
-soundOffsets
+{{{ 
+include[type]Block: true indicates to include this type of block in the experiment. If false, the next two properties would be ignored. 
+single[type]Block: true indicates that all trials of this type, from repetitions, should be forced into a single block (within each metablock). 
+single[type]FullRandom: true indicates that all trials within a block will be randomized, even across repetitions.
+}}}
 
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *includeAudioBlock* || boolean || Audio only block ||
+|| *singleAudioBlock* || boolean || ||
+|| *singleAudioFullRandom* || boolean || ||
+|| *includeAnimationBlock* || boolean || Animation only block ||
+|| *singleAnimationBlock* || boolean || ||
+|| *singleAnimationFullRandom* || boolean || ||
+|| *includeVideoBlock* || boolean || Video block ||
+|| *singleVideoBlock* || boolean || ||
+|| *singleVideoFullRandom* || boolean || ||
+|| *includeAudioAnimationBlock* || boolean || Audio and Animation block ||
+|| *singleAudioAnimationBlock* || boolean || ||
+|| *singleAudioAnimationFullRandom* || boolean || ||
 
-videoParams
-videoFileFormat
-videoFileExtensions
-videoFileSubDirectory
-animationParams
-animationFileFormat
-animationFileExtensions
-animationFileSubDirectory
-audioParams
-audioFileFormat
-audioFileExtensions
-audioFileSubDirectory
+== Animation and Audio Options ==
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *animationPointAspect* || float || Animation point aspect scales point locations according to the given relationship between x and y values (animationPointAspect=x/y). If greater than zero, this value overrides "pointAspectRatio" in animation files. ||
+|| *animationPointSize* || float || Base radius for animation points - sizes in the animation files are relative based on this value, which does not scale linearly. ||
+|| *numAnimationPoints* || non-negative integer || Maximum number of animation points/dots included - more than one value here creates sets of trials for each case. ||
+|| *connectDots* || boolean || Indicator for whether the points/dots in the animation should have lines connecting them. ||
+|| *soundOffsets* || comma delimited list of integers || List representing milliseconds that tone should be offset. KEY EXPERIMENT VARIABLE ||
 
-synchronizeParameters
+== Parameters and File Specification ==
 
+This specification allows for arbitrary file naming by defining parameters and file formats based on those parameters. Then all values of those parameters are combined in all possible ways to get the files to load. 
 
-*Parameter setting*
-{parameter}
-{parameter}.label
-{parameter}.labels
+Parameters in the file format string are specified as `'${PARAM_NAME}'` Files are then constructed by replacing every occurrence of `${PARAM_NAME}` with all possible values extracted from the entry `'PARAM_NAME=[value], [value], [value], ...'`
 
+For all entries, capitalization matters!
+
+Most media will only need one file extension to be specified.  In the case of multiple, they will be checked IN ORDER for the existence of the desired media file.  (So, 'dnn.avi' would be used, if it exists, instead of 'dnn.dv', even if 'dnn.dv' also exists.)
+
+|| _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
+|| *videoParams* || comma delimited single-word strings || Parameters listed here will be searched for in the properties file and used to build file names using the file format in the *videoFileFormat* property. See [PropertiesFiles#Parameter_Settings Parameter Settings]. ||
+|| *videoFileFormat* || single string using above parameters || Example: `${videoParamOne}${videoParamTwo}` would create possible filenames that are concatenations of videoParamOne values and videoParamTwo values. ||
+|| *videoFileExtensions* || comma delimited list of single-word strings || List of possible video file extensions. See above note about extension ordering. ||
+|| *videoFileSubDirectory* || string || Folder name inside data directory (chosen during setup) to search inside of for video files. ||
+
+|| *animationParams* || comma delimited single-word strings || Parameters listed here will be searched for in the properties file and used to build file names using the file format in the *animationFileFormat* property. See [PropertiesFiles#Parameter_Settings Parameter Settings]. ||
+|| *animationFileFormat* || single string using above parameters || Example: `${animationParamOne}${animationParamTwo}` would create possible filenames that are concatenations of animationParamOne values and animationParamTwo values. ||
+|| *animationFileExtensions* || comma delimited list of single-word strings || List of possible animation file extensions. See above note about extension ordering. ||
+|| *animationFileSubDirectory* || string || Folder name inside data directory (chosen during setup) to search inside of for animation files. ||
+
+|| *audioParams* || comma delimited single-word strings || Parameters listed here will be searched for in the properties file and used to build file names using the file format in the *audioFileFormat* property. See [PropertiesFiles#Parameter_Settings Parameter Settings]. || 
+|| *audioFileFormat* || single string using above parameters || Example: `${audioParamOne}${audioParamTwo}` would create possible filenames that are concatenations of audioParamOne values and audioParamTwo values.||
+|| *audioFileExtensions* || comma delimited list of single-word strings || List of possible audio file extensions. See above note about extension ordering. ||
+|| *audioFileSubDirectory* || string || Folder name inside data directory (chosen during setup) to search inside of for audio files. ||
+
+|| *synchronizeParameters* || boolean || Indicate if parameters appearing in more than one file type should be synchronized if those types both appear in the same trial (audio and animation).  That is, should parameter types be combined independently (synchronizeParameters=false) for two different media sources.  Default is 'true'.  Does not apply to the Demo GUI. ||
+
+=== Parameter Settings ===
+
+These are properties that are referenced by listing a property in *videoParams*, *animationParams*, or *audioParams*. 
+|| *{parameter}* || comma delimited list of values || Possible values for this parameter. ||
+|| *{parameter}.label* || string || Main label for this type of parameter ||
+|| *{parameter}.labels* || comma delimited list of strings || Labels for each of the parameter values. For spaces, use '\u00A0'.||
+
+File specification example:
+
+Say we have a directory called 'video' which contains several video files that we want to load:
+{{{
+/dataDirectory
+  |- /video
+     |- 240_awesome.wav
+     |- 240_boring.wav
+     |- 240_cool.wav
+     |- 360_awesome.wav
+     |- 360_boring.wav
+     |- 360_cool.wav
+}}}
+To load these files, we can set the video parameters as follows:
+{{{
+# (The params values are ones we choose, so we can refer to them later.)
+videoParams=timing, coolness 
+
+# (Here we use the above defined parameters to build a filename string that will match the files we want to load.)
+# (Notice that the underscore '_' was added between the parameter values, and parameter names are surrounded with the construct:  ${paramName}.)
+videoFileFormat= ${timing}_${coolness}
+
+# (Now we specify the file extension types to match .wav files (Do not add any '.' here))
+videoFileExtensions=wav
+
+# (and specify the directory within the data directory to find these files)
+videoFileSubDirectory=video
+}}}
+
+Now we just have to give the possible values for our chosen parameters:
+{{{
+# possible values for timing are:
+timing= 240, 360
+timing.label= Timing: 
+timing.labels= 240Label, 360Label
+
+# possible values for coolness are: (notice the use of '\u00A0' to put spaces in the coolness labels)
+coolness= awesome, boring, cool
+coolness.label= Coolness
+coolness.labels= Awesome\u00A0Label, Boring\u00A0Label, Cool\u00A0Label
+}}}
+
+Now the loading code will search for the following six files in the video directory: 
+ * 240_awesome.wav
+ * 240_boring.wav
+ * 240_cool.wav
+ * 360_awesome.wav
+ * 360_boring.wav
+ * 360_cool.wav
+
+And it will also apply the matching labels in data output. 
+
+This file specification is very general and allows for many styles of filename, as long as the format is uniform for the specific experiment.
+
+------
 == SI Specific Properties ==
 
 === Slider Response Controls ===
@@ -244,6 +323,8 @@ Long answer labels may mess up the experiment GUI layout.
 || *durationMax* || integer || maximum end of allowed range for duration slider  ||
 || *agreementMin* || integer || minimum end of allowed range for agreement slider ||
 || *agreementMax* || integer || maximum end of allowed range for agreement slider  ||
+
+------
 
 == TOJ Specific Properties ==
 || _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
@@ -273,7 +354,7 @@ Hotkeys must all be unique, or erroneous behavior will occur. Only first charact
 Property keys for confidence must be of the form: "confidence.{integer}" where the integer is >= confidenceMin Values may not be skipped, although order does not matter.
 
 Example:
-<pre> 
+{{{
 confidenceMin=-2
 confidenceOrderHighToLow=true
 confidence.-2=Very unconfident
@@ -286,7 +367,7 @@ confidence.-1.hotkey=	2
 confidence.0.hotkey=	3
 confidence.1.hotkey=	4
 confidence.2.hotkey=	5
-</pre>
+}}}
 
 || _*Property*_ || _*Possible Values*_ || _*Usage Notes*_ ||
 || *confidenceMin* || integer || The minimum (numerically) confidence value ||
